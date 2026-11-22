@@ -15,3 +15,18 @@
       '()
       (cons (f (car lst))
             (my-map f (cdr lst)))))
+
+
+            
+;; insert-if-short: put x at the front of every list (at every nesting level)
+;; whose original length is < n. Atoms are left unchanged.
+(define (insert-if-short x lst n)
+  (let ((processed
+         (my-map (lambda (e)
+                   (if (or (null? e) (pair? e))
+                       (insert-if-short x e n)
+                       e))
+                 lst)))
+    (if (< (my-length lst) n)
+        (cons x processed)
+        processed)))
