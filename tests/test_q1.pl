@@ -18,6 +18,10 @@ run_tests :-
     test_clue_6,
     test_clue_7,
     test_clue_8,
+    test_clue_9,
+    test_count_8_clues,
+    test_count_9_clues,
+    test_count_subset_clues,
     format("All P1 tests passed.~n").
 
 % test_main_runs: main/0 executes without error
@@ -73,3 +77,25 @@ test_clue_7 :-
 test_clue_8 :-
     solve(S), clue(8, S),
     format("  PASS: clue 8 holds~n").
+
+test_clue_9 :-
+    count_solutions([1,2,3,4,5,6,7,8,9], 1),
+    findall(S, (solution(S), apply_active_clues([1,2,3,4,5,6,7,8,9], S)), [UniqueSol]),
+    clue(9, UniqueSol),
+    format("  PASS: clue 9 holds for unique solution~n").
+
+test_count_8_clues :-
+    count_solutions([1,2,3,4,5,6,7,8], N),
+    N =:= 3,
+    format("  PASS: count_solutions for clues 1-8 gives N = 3~n").
+
+test_count_9_clues :-
+    count_solutions([1,2,3,4,5,6,7,8,9], N),
+    N =:= 1,
+    format("  PASS: count_solutions for clues 1-9 gives N = 1~n").
+
+test_count_subset_clues :-
+    count_solutions([1,2,3], NSubset),
+    count_solutions([1,2,3,4,5,6,7,8], NFull),
+    NSubset > NFull,
+    format("  PASS: subset [1,2,3] count (~w) > full set count (~w)~n", [NSubset, NFull]).
