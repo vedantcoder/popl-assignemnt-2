@@ -1,5 +1,5 @@
 % Test cases for P1: Department Assignment Puzzle
-% Run: swipl -q -l code/id_q1.pl -l tests/test_q1.pl -g run_tests -t halt
+% Run: swipl -q -l code/27_q1.pl -l tests/test_q1.pl -g run_tests -t halt
 
 :- use_module(library(lists)).
 

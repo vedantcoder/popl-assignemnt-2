@@ -3,11 +3,13 @@
 ; Test cases for S1: Binary Tree Traversals
 ; Run: racket tests/test_q3.rkt
 
-; Dynamically locate and access the id_q3 module without modifying code/id_q3.rkt
+; Dynamically locate and access the 27_q3 module without modifying code/27_q3.rkt
 (define id-q3-path
-  (if (file-exists? "code/id_q3.rkt")
-      "code/id_q3.rkt"
-      "../code/id_q3.rkt"))
+  (cond
+    ((file-exists? "code/27_q3.rkt") "code/27_q3.rkt")
+    ((file-exists? "../code/27_q3.rkt") "../code/27_q3.rkt")
+    ((file-exists? "code/id_q3.rkt") "code/id_q3.rkt")
+    (else "../code/id_q3.rkt")))
 
 (dynamic-require id-q3-path #f)
 (define id-q3-ns (module->namespace id-q3-path))

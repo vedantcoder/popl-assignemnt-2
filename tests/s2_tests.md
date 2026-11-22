@@ -3,7 +3,7 @@
 How to run one test (from the repo folder):
 
 ```
-cp code/id_q4.rkt /tmp/test_s2.rkt
+cp code/27_q4.rkt /tmp/test_s2.rkt
 echo '(print-insert-result)' >> /tmp/test_s2.rkt
 echo '<input>' | racket /tmp/test_s2.rkt
 ```

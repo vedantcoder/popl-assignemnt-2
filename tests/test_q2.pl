@@ -1,5 +1,5 @@
 % Test cases for P2: Form a Valid Arithmetic Equation
-% Run: swipl -q -f code/id_q2.pl -f tests/test_q2.pl -g run_tests -t halt
+% Run: swipl -q -l code/27_q2.pl -l tests/test_q2.pl -g run_tests -t halt
 
 :- use_module(library(lists)).
 

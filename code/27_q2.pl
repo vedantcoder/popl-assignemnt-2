@@ -1,5 +1,5 @@
 % P2: Form a Valid Arithmetic Equation
-% File: id_q2.pl
+% File: 27_q2.pl
 
 :- use_module(library(lists)).
 

@@ -1,5 +1,5 @@
 % P1: Department Assignment Puzzle
-% File: id_q1.pl
+% File: 27_q1.pl
 
 :- use_module(library(lists)).
 

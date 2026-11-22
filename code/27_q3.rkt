@@ -1,7 +1,7 @@
 #lang racket/base
 
 ; CS F301 POPL Assignment 2 - Scheme Component (S1)
-; File: id_q3.rkt
+; File: 27_q3.rkt
 ;
 ; Representation:
 ; A binary tree is either '() or a 3-element list (value left right).
