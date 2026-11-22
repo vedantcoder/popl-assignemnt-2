@@ -118,3 +118,20 @@ generate_equation(List, Equation) :-
     List = [_, _|_],
     valid_equation(List, Equation),
     !.
+
+% all_equations(+List, -Equations)
+% Unifies Equations with all unique valid equations for List,
+% sorted by standard order of terms. Returns [] if no valid equation exists
+% or if List length is less than 2.
+all_equations(List, Equations) :-
+    (   List = [_, _|_]
+    ->  findall(Eq, valid_equation(List, Eq), RawList),
+        sort(RawList, Equations)
+    ;   Equations = []
+    ).
+
+% count_equations(+List, -N)
+% N is the count of all unique valid equations for List.
+count_equations(List, N) :-
+    all_equations(List, Equations),
+    length(Equations, N).
