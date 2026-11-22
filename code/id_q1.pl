@@ -65,3 +65,31 @@ clue(7, Solution) :-
 clue(8, Solution) :-
     member(p(_, research, Lang, data), Solution),
     Lang \= javascript.
+
+% solve(-Solution)
+% Finds a valid assignment satisfying all 8 clues.
+solve(Solution) :-
+    solution(Solution),
+    clue(1, Solution),
+    clue(2, Solution),
+    clue(3, Solution),
+    clue(4, Solution),
+    clue(5, Solution),
+    clue(6, Solution),
+    clue(7, Solution),
+    clue(8, Solution).
+
+% print_person(+Person)
+% Prints one line in the format: Name = [Dept, Lang, Project]
+print_person(p(Name, Dept, Lang, Project)) :-
+    format("~w = [~w, ~w, ~w]~n", [Name, Dept, Lang, Project]).
+
+% main/0
+% Prints one solution satisfying all clues, four lines, one per person.
+main :-
+    solve(Solution),
+    Solution = [Alex, Ben, Carla, Dana],
+    print_person(Alex),
+    print_person(Ben),
+    print_person(Carla),
+    print_person(Dana).
