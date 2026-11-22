@@ -66,6 +66,19 @@ clue(8, Solution) :-
     member(p(_, research, Lang, data), Solution),
     Lang \= javascript.
 
+% apply_active_clues(+Active, +Solution)
+% Applies each clue whose number is in Active to Solution.
+apply_active_clues([], _).
+apply_active_clues([ClueNum|Rest], Solution) :-
+    clue(ClueNum, Solution),
+    apply_active_clues(Rest, Solution).
+
+% count_solutions(+Active, -N)
+% N is the number of solutions satisfying exactly the clues in Active.
+count_solutions(Active, N) :-
+    findall(Solution, (solution(Solution), apply_active_clues(Active, Solution)), Solutions),
+    length(Solutions, N).
+
 % solve(-Solution)
 % Finds a valid assignment satisfying all 8 clues.
 solve(Solution) :-
