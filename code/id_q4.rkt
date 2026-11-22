@@ -6,3 +6,12 @@
     (if (null? rest)
         count
         (loop (cdr rest) (+ count 1)))))
+
+        
+;; my-map: apply f to each top-level element of lst, keeping order.
+;; Plain recursion (no reverse/append allowed).
+(define (my-map f lst)
+  (if (null? lst)
+      '()
+      (cons (f (car lst))
+            (my-map f (cdr lst)))))
