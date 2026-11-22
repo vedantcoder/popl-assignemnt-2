@@ -1,5 +1,5 @@
 % Test cases for P1: Department Assignment Puzzle
-% Run: swipl -q -f code/id_q1.pl -f tests/test_q1.pl -g run_tests -t halt
+% Run: swipl -q -l code/id_q1.pl -l tests/test_q1.pl -g run_tests -t halt
 
 :- use_module(library(lists)).
 
@@ -26,9 +26,8 @@ run_tests :-
 
 % test_main_runs: main/0 executes without error
 test_main_runs :-
-    ( main -> format("  PASS: main/0 runs successfully~n")
-    ; format("  FAIL: main/0 did not succeed~n"), fail
-    ).
+    main,
+    format("  PASS: main/0 runs successfully~n").
 
 % test_solve_returns_solution: solve/1 returns a 4-element list
 test_solve_returns_solution :-
