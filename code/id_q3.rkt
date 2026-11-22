@@ -72,3 +72,33 @@
     (newline)
     (display (postorder-helper tree '()))
     (newline)))
+
+; -----------------------------------------------------------------------------
+; S1.c: Tree Height and Leaf Count (Single-Traversal Calculation)
+; -----------------------------------------------------------------------------
+
+; height-and-leaves-helper: tree -> (list height leaf-count)
+; Computes both height and leaf count in a single recursive traversal.
+; 1. Returns '(0 0) for an empty tree.
+; 2. Recursively computes the result for left and right subtrees exactly once.
+; 3. Height = 1 + max(left-height, right-height).
+; 4. Leaf count = 1 if both children are empty; otherwise (left-leaves + right-leaves).
+; 5. Returns (list height leaf-count).
+(define (height-and-leaves-helper tree)
+  (if (null? tree)
+      '(0 0)
+      (let ((left-res (height-and-leaves-helper (cadr tree)))
+            (right-res (height-and-leaves-helper (caddr tree))))
+        (let ((h (+ 1 (max (car left-res) (car right-res))))
+              (leaves (if (and (null? (cadr tree)) (null? (caddr tree)))
+                          1
+                          (+ (cadr left-res) (cadr right-res)))))
+          (list h leaves)))))
+
+; print-height-and-leaves: tree -> void
+; Prints the list (height leaf-count) on exactly one line using display,
+; followed by a newline.
+(define (print-height-and-leaves tree)
+  (begin
+    (display (height-and-leaves-helper tree))
+    (newline)))
