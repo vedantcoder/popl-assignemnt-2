@@ -4,6 +4,9 @@ Logic and Functional Programming
 
 ## Group Members
 - Group ID: **27**
+- Animish Kumar (2024A7PS1159H)
+- Vedant Nichal (2024A7PS0174H)
+- Ananya Srivastava (2024A7PS0131H)
 
 ## Repository Layout
 - `code/27_q1.pl` — P1: Department Assignment Puzzle (SWI-Prolog)
