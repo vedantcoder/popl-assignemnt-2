@@ -97,3 +97,24 @@ right_to_string(op(Op, Left, Right), ParentPrec, String) :-
         string_concat(T, ")", String)
     ;   String = InnerStr
     ).
+
+% valid_equation(+List, -Equation)
+% Non-deterministic generator of valid canonical equations for List.
+valid_equation(List, Equation) :-
+    split_list(List, LeftList, RightList),
+    build_expr(LeftList, LeftExpr),
+    eval_expr(LeftExpr, Value),
+    build_expr(RightList, RightExpr),
+    eval_expr(RightExpr, Value),
+    expr_to_string(LeftExpr, LeftStr),
+    expr_to_string(RightExpr, RightStr),
+    string_concat(LeftStr, "=", Temp),
+    string_concat(Temp, RightStr, Equation).
+
+% generate_equation(+List, -Equation)
+% Unifies Equation with one valid equation for List.
+% Fails cleanly if no valid equation exists, including lists of length 0 or 1.
+generate_equation(List, Equation) :-
+    List = [_, _|_],
+    valid_equation(List, Equation),
+    !.
