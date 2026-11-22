@@ -1,10 +1,14 @@
 #lang racket/base
 
-; S1.a: Inorder Binary Tree Traversal
+; CS F301 POPL Assignment 2 - Scheme Component (S1)
 ; File: id_q3.rkt
 ;
 ; Representation:
 ; A binary tree is either '() or a 3-element list (value left right).
+
+; -----------------------------------------------------------------------------
+; S1.a: Inorder Binary Tree Traversal
+; -----------------------------------------------------------------------------
 
 ; inorder-helper: tree, accumulator -> list
 ; Accumulates values in inorder sequence (left, root, right).
@@ -25,4 +29,46 @@
 (define (print-inorder tree)
   (begin
     (display (inorder-helper tree '()))
+    (newline)))
+
+; -----------------------------------------------------------------------------
+; S1.b: All Binary Tree Traversals (Inorder, Preorder, Postorder)
+; -----------------------------------------------------------------------------
+
+; preorder-helper: tree, accumulator -> list
+; Accumulates values in preorder sequence (root, left, right).
+; The accumulator `acc` represents the elements that appear after `tree`.
+; The right subtree is traversed with `acc` to form the tail, the left subtree
+; is traversed with that tail, and finally the root value is consed to the front.
+(define (preorder-helper tree acc)
+  (if (null? tree)
+      acc
+      (cons (car tree)
+            (preorder-helper (cadr tree)
+                             (preorder-helper (caddr tree) acc)))))
+
+; postorder-helper: tree, accumulator -> list
+; Accumulates values in postorder sequence (left, right, root).
+; The accumulator `acc` represents the elements that appear after `tree`.
+; The root value is consed to `acc`, the right subtree is traversed with that
+; accumulator, and then the left subtree is traversed with the resulting tail.
+(define (postorder-helper tree acc)
+  (if (null? tree)
+      acc
+      (postorder-helper (cadr tree)
+                        (postorder-helper (caddr tree)
+                                          (cons (car tree) acc)))))
+
+; print-all-traversals: tree -> void
+; Prints three lines using display, each followed by a newline:
+; 1. Inorder list
+; 2. Preorder list
+; 3. Postorder list
+(define (print-all-traversals tree)
+  (begin
+    (display (inorder-helper tree '()))
+    (newline)
+    (display (preorder-helper tree '()))
+    (newline)
+    (display (postorder-helper tree '()))
     (newline)))
