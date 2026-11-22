@@ -66,6 +66,10 @@ clue(8, Solution) :-
     member(p(_, research, Lang, data), Solution),
     Lang \= javascript.
 
+% CLUE 9: The friend whose favorite language is Java prefers the embedded project.
+clue(9, Solution) :-
+    member(p(_, _, java, embedded), Solution).
+
 % apply_active_clues(+Active, +Solution)
 % Applies each clue whose number is in Active to Solution.
 apply_active_clues([], _).
