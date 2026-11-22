@@ -18,15 +18,33 @@
 
 
             
-;; insert-if-short: put x at the front of every list (at every nesting level)
-;; whose original length is < n. Atoms are left unchanged.
+;; make-inserter: returns a function that inserts x at the front of every
+;; list (at every nesting level) whose original length satisfies len-ok?.
+(define (make-inserter x len-ok?)
+  (letrec ((insert
+            (lambda (lst)
+              (let ((processed
+                     (my-map (lambda (e)
+                               (if (or (null? e) (pair? e))
+                                   (insert e)
+                                   e))
+                             lst)))
+                (if (len-ok? (my-length lst))
+                    (cons x processed)
+                    processed)))))
+    insert))
+
+;; insert-if-short: insert x into every list shorter than n.
 (define (insert-if-short x lst n)
-  (let ((processed
-         (my-map (lambda (e)
-                   (if (or (null? e) (pair? e))
-                       (insert-if-short x e n)
-                       e))
-                 lst)))
-    (if (< (my-length lst) n)
-        (cons x processed)
-        processed)))
+  ((make-inserter x (lambda (len) (< len n))) lst))
+
+
+        
+;; print-insert-result: read x, lst, n from stdin (in that order),
+;; then display the result followed by a newline.
+(define (print-insert-result)
+  (let* ((x (read))
+         (lst (read))
+         (n (read)))
+    (display (insert-if-short x lst n))
+    (newline)))
